@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terva Technologies | Building Technology That Shapes the Future</title>
+    <meta name="description" content="Terva Technologies engineers intelligent software, high-performance AI systems, modern cloud infrastructure, cybersecurity architectures, and enterprise developer platforms.">
+    <meta name="keywords" content="Enterprise Software, Artificial Intelligence, Cloud Infrastructure, Cybersecurity, Developer Tools, Systems Engineering, Terva OS">
+    <meta name="author" content="Terva Technologies">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://terva.tech/">
+    <meta property="og:title" content="Terva Technologies | Building Technology That Shapes the Future">
+    <meta property="og:description" content="Engineering intelligent software, AI systems, and secure cloud platforms built for enterprise resilience and timeless execution.">
+    <meta property="og:image" content="https://terva.tech/og-image.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://terva.tech/">
+    <meta property="twitter:title" content="Terva Technologies">
+    <meta property="twitter:description" content="Building Technology That Shapes the Future.">
+    <meta property="twitter:image" content="https://terva.tech/og-image.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://terva.tech/">
+
+    <!-- Structured Data (Schema.org) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Terva Technologies",
+      "url": "https://terva.tech",
+      "logo": "https://terva.tech/logo.svg",
+      "email": "tervatechnologies2@gmail.com",
+      "description": "Building Technology That Shapes the Future. Enterprise software, AI systems, cloud architectures, and security engineering.",
+      "foundingDate": "2021",
+      "sameAs": [
+        "https://linkedin.com/company/tervatech",
+        "https://github.com/terva-tech",
+        "https://twitter.com/tervatech"
+      ]
+    }
+    </script>
+
+    <style>
+        :root {
+            --bg-primary: #08111F;
+            --text-primary: #FFFFFF;
+            --text-secondary: #94A3B8;
+            --accent: #0066FF;
+            --accent-cyan: #00C2FF;
+            --accent-glow: rgba(0, 194, 255, 0.4);
+            --surface: #0F172A;
+            --surface-card: #101827;
+            --border: rgba(255, 255, 255, 0.12);
+            --border-hover: rgba(0, 194, 255, 0.6);
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+            --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 16px;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            position: relative;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Cursor Light Glow */
+        #cursor-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 194, 255, 0.08) 0%, rgba(0, 102, 255, 0) 70%);
+            pointer-events: none;
+            z-index: 99;
+            transform: translate(-50%, -50%);
+            transition: transform 0.05s ease-out;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 600;
+            line-height: 1.15;
+            letter-spacing: -0.025em;
+            color: var(--text-primary);
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-weight: 400;
+        }
+
+        .label-mono {
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--accent-cyan);
+            font-weight: 500;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 9rem 0;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+            will-change: opacity, transform;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: background-color 0.4s var(--ease-out), border-color 0.4s var(--ease-out), backdrop-filter 0.4s var(--ease-out);
+            border-bottom: 1px solid transparent;
+        }
+
+        header.scrolled {
+            background-color: rgba(8, 17, 31, 0.92);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-color: var(--border);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 84px;
+        }
+
+        .brand-logo-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            transition: opacity 0.2s ease, transform 0.2s ease;
+        }
+
+        .brand-logo-link:hover {
+            opacity: 0.95;
+            transform: translateY(-1px);
+        }
+
+        .brand-svg {
+            height: 48px;
+            width: auto;
+            filter: drop-shadow(0 0 10px rgba(0, 194, 255, 0.3));
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--text-primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent) 0%, var(--accent-cyan) 100%);
+            transition: width 0.3s var(--ease-out);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.8rem 1.6rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all 0.3s var(--ease-out);
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0052CC 0%, #00C2FF 100%);
+            color: #FFFFFF;
+            box-shadow: 0 4px 20px var(--accent-glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 28px rgba(0, 194, 255, 0.6);
+        }
+
+        .btn-secondary {
+            background-color: rgba(255, 255, 255, 0.04);
+            color: var(--text-primary);
+            border-color: var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.09);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            padding-top: 140px;
+            padding-bottom: 80px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid-bg {
+            position: absolute;
+            inset: 0;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(circle at 50% 40%, black 20%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at 50% 40%, black 20%, transparent 80%);
+            pointer-events: none;
+        }
+
+        .hero-layout {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.8rem, 5vw, 4.5rem);
+            line-height: 1.08;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 580px;
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .hero-visual {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero-emblem-glow {
+            position: absolute;
+            width: 360px;
+            height: 360px;
+            background: radial-gradient(circle, rgba(0, 194, 255, 0.28) 0%, rgba(0, 102, 255, 0.1) 50%, transparent 70%);
+            filter: blur(45px);
+            animation: pulseGlow 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(0.9); opacity: 0.7; }
+            100% { transform: scale(1.18); opacity: 1; }
+        }
+
+        .hero-logo-display {
+            position: relative;
+            z-index: 2;
+            width: 360px;
+            filter: drop-shadow(0 20px 35px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 25px rgba(0, 194, 255, 0.3));
+            animation: floatLogo 6s ease-in-out infinite;
+        }
+
+        @keyframes floatLogo {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        /* Section Header */
+        .section-header {
+            margin-bottom: 4rem;
+            max-width: 680px;
+        }
+
+        .section-header .label-mono {
+            margin-bottom: 0.75rem;
+            display: inline-block;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            letter-spacing: -0.025em;
+            margin-bottom: 1rem;
+        }
+
+        /* Story & Philosophy */
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .tilt-card {
+            background-color: var(--surface);
+            border: 1px solid var(--border);
+            padding: 3rem;
+            border-radius: 8px;
+            position: relative;
+            transition: border-color 0.3s ease, transform 0.1s ease;
+            transform-style: preserve-3d;
+        }
+
+        .tilt-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        .phi-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            padding: 2.25rem 2rem;
+            border-radius: 8px;
+            transition: all 0.3s var(--ease-out);
+        }
+
+        .phi-card:hover {
+            border-color: rgba(0, 194, 255, 0.4);
+            transform: translateY(-4px);
+        }
+
+        .phi-icon {
+            width: 40px;
+            height: 40px;
+            margin-bottom: 1.25rem;
+            color: var(--accent-cyan);
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .service-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2.25rem 1.75rem;
+            transition: all 0.3s var(--ease-out);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent-cyan);
+            background: var(--surface-card);
+            transform: translateY(-4px);
+        }
+
+        .service-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(0, 102, 255, 0.12);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+            transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: linear-gradient(135deg, #0052CC 0%, #00C2FF 100%);
+            color: #FFFFFF;
+            transform: scale(1.05);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s var(--ease-out);
+        }
+
+        .product-card:hover {
+            border-color: rgba(0, 194, 255, 0.5);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .product-preview {
+            height: 200px;
+            background-color: #050A14;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-preview svg {
+            transition: transform 0.5s var(--ease-out);
+        }
+
+        .product-card:hover .product-preview svg {
+            transform: scale(1.1);
+        }
+
+        .product-info {
+            padding: 2rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-badge {
+            align-self: flex-start;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            padding: 0.25rem 0.6rem;
+            background: rgba(0, 194, 255, 0.08);
+            border: 1px solid rgba(0, 194, 255, 0.2);
+            border-radius: 4px;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .product-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: gap 0.2s ease;
+            margin-top: auto;
+        }
+
+        .product-link:hover {
+            gap: 0.7rem;
+        }
+
+        /* Architecture Diagram */
+        .tech-architecture-wrapper {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-top: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .arch-diagram {
+            width: 100%;
+            height: auto;
+            max-height: 380px;
+        }
+
+        /* Industries */
+        .industries-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.25rem;
+        }
+
+        .industry-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .industry-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 3.5rem 2rem;
+            text-align: center;
+        }
+
+        .metric-item .metric-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: -0.03em;
+            font-family: var(--font-mono);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-item .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* Careers Box */
+        .careers-box {
+            background: linear-gradient(135deg, var(--surface) 0%, #0D1627 100%);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .career-perks {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .career-perks li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .career-perks svg {
+            color: var(--accent-cyan);
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 4rem;
+        }
+
+        .contact-info-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 1.25rem;
+            align-items: flex-start;
+        }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 6px;
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+            flex-shrink: 0;
+        }
+
+        .contact-form {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        .form-control {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.85rem 1rem;
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px rgba(0, 194, 255, 0.2);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Notification Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--surface);
+            border: 1px solid var(--accent-cyan);
+            color: var(--text-primary);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transform: translateY(150%);
+            transition: transform 0.4s var(--ease-out);
+            z-index: 2000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #040810;
+            padding: 5rem 0 2.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h5 {
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-layout {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .hero-visual {
+                height: 360px;
+            }
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .story-grid {
+                grid-template-columns: 1fr;
+            }
+            .industries-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .careers-box {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 6rem 0;
+            }
+            .nav-links {
+                display: none;
+            }
+            .philosophy-grid {
+                grid-template-columns: 1fr;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Mouse Spotlight Effect -->
+    <div id="cursor-glow"></div>
+
+    <!-- Ambient Particle Canvas -->
+    <canvas id="bg-canvas"></canvas>
+
+    <!-- Header Navigation -->
+    <header id="main-header">
+        <div class="container nav-wrapper">
+            <a href="#" class="brand-logo-link" aria-label="Terva Technologies Home">
+                <!-- Recreated High-Vibrancy White & Blue Terva Logo SVG -->
+                <svg class="brand-svg" viewBox="0 0 520 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="headerGradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" stop-color="#0052CC"/>
+                            <stop offset="50%" stop-color="#0080FF"/>
+                            <stop offset="100%" stop-color="#00C2FF"/>
+                        </linearGradient>
+                        <linearGradient id="headerGradCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#00C2FF"/>
+                            <stop offset="100%" stop-color="#0066FF"/>
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Left Wing (Bright Crisp White with subtle structural contrast) -->
+                    <polygon points="12,18 88,18 76,38 12,38" fill="#FFFFFF"/>
+                    <polygon points="26,48 88,48 76,65 26,65" fill="#E2E8F0"/>
+                    <polygon points="38,38 56,38 56,122 38,136" fill="#CBD5E1"/>
+
+                    <!-- Right Wing (Vibrant Electric Blue Gradient) -->
+                    <polygon points="112,18 188,18 176,38 112,38" fill="url(#headerGradBlue)"/>
+                    <polygon points="112,48 174,48 162,65 112,65" fill="url(#headerGradBlue)"/>
+                    <polygon points="112,38 130,38 130,136 112,122" fill="#0073E6"/>
+
+                    <!-- TERVA Wordmark (Pure Bold White) -->
+                    <!-- T -->
+                    <path d="M 210 50 H 234 M 222 50 V 90" stroke="#FFFFFF" stroke-width="7" stroke-linecap="square"/>
+                    <!-- E -->
+                    <path d="M 252 50 H 274 M 252 70 H 272 M 252 90 H 274" stroke="#FFFFFF" stroke-width="7" stroke-linecap="square"/>
+                    <!-- R -->
+                    <path d="M 292 90 V 50 H 312 C 320 50, 324 55, 324 62 C 324 69, 318 73, 310 73 H 292 M 306 73 L 324 90" stroke="#FFFFFF" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+                    <!-- V -->
+                    <path d="M 340 50 L 354 90 L 368 50" stroke="#FFFFFF" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+                    <!-- A (White frame with Electric Blue Triangle) -->
+                    <path d="M 384 90 L 400 50 L 416 90" stroke="#FFFFFF" stroke-width="7" stroke-linecap="square" stroke-linejoin="miter"/>
+                    <polygon points="400,66 392,82 408,82" fill="url(#headerGradCyan)"/>
+
+                    <!-- SUBTEXT: TECHNOLOGIES (Vibrant Blue Mono) -->
+                    <text x="210" y="122" fill="#00C2FF" font-family="'IBM Plex Mono', monospace" font-size="16" font-weight="600" letter-spacing="11">TECHNOLOGIES</text>
+                    <line x1="210" y1="138" x2="416" y2="138" stroke="rgba(0,194,255,0.4)" stroke-width="1.5"/>
+                    <circle cx="313" cy="138" r="3.5" fill="#00C2FF"/>
+                </svg>
+            </a>
+
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Capabilities</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#technology">Architecture</a></li>
+                    <li><a href="#careers">Careers</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="#contact" class="btn btn-primary">Get in Touch</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <div class="hero-grid-bg"></div>
+            <div class="container hero-layout">
+                <div class="hero-content reveal">
+                    <span class="label-mono">Enterprise Software &amp; AI Engineering</span>
+                    <h1>Building Technology That Shapes the Future.</h1>
+                    <p>Terva Technologies designs and builds high-performance software, artificial intelligence systems, cloud architectures, and developer platform ecosystems engineered for scale, reliability, and timeless performance.</p>
+                    <div class="hero-cta-group">
+                        <a href="#products" class="btn btn-primary">Explore Platform</a>
+                        <a href="#about" class="btn btn-secondary">Our Engineering Vision</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual reveal">
+                    <div class="hero-emblem-glow"></div>
+                    
+                    <!-- Large Glowing White & Blue Hero Emblem Visual -->
+                    <svg class="hero-logo-display" viewBox="0 0 320 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="heroGradBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#0052CC"/>
+                                <stop offset="50%" stop-color="#0080FF"/>
+                                <stop offset="100%" stop-color="#00C2FF"/>
+                            </linearGradient>
+                            <filter id="whiteGlow" x="-20%" y="-20%" width="140%" height="140%">
+                                <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#FFFFFF" flood-opacity="0.5"/>
+                            </filter>
+                        </defs>
+
+                        <!-- Left Wing (White Element) -->
+                        <polygon points="30,40 145,40 128,75 30,75" fill="#FFFFFF" filter="url(#whiteGlow)"/>
+                        <polygon points="52,90 145,90 128,120 52,120" fill="#E2E8F0"/>
+                        <polygon points="108,75 145,75 145,240 108,215" fill="#CBD5E1"/>
+
+                        <!-- Right Wing (Electric Blue Element) -->
+                        <polygon points="165,40 280,40 260,75 165,75" fill="url(#heroGradBlue)"/>
+                        <polygon points="165,90 258,90 240,120 165,120" fill="url(#heroGradBlue)"/>
+                        <polygon points="165,75 202,75 202,240 165,215" fill="#0073E6"/>
+
+                        <!-- Central Axis Light Indicator -->
+                        <circle cx="155" cy="275" r="4.5" fill="#00C2FF"/>
+                        <line x1="40" y1="275" x2="270" y2="275" stroke="rgba(0,194,255,0.4)" stroke-width="1.5"/>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Company Story & About Section -->
+        <section id="about">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="label-mono">Company Story</span>
+                    <h2>Engineered for Scale &amp; Longevity</h2>
+                    <p>We believe great technology should operate invisibly—delivering dependable performance with pure architectural simplicity.</p>
+                </div>
+
+                <div class="story-grid">
+                    <div class="tilt-card reveal">
+                        <span class="label-mono">Our Mission</span>
+                        <h3 style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: 1.5rem;">Accelerating Enterprise Innovation</h3>
+                        <p>To design and deploy resilient, high-throughput software architectures that empower enterprises and global developers to solve complex systemic challenges with confidence.</p>
+                    </div>
+                    <div class="tilt-card reveal">
+                        <span class="label-mono">Our Vision</span>
+                        <h3 style="margin-top: 0.5rem; margin-bottom: 1rem; font-size: 1.5rem;">Global Standard in Engineering</h3>
+                        <p>To establish a globally recognized technology brand defined by exceptional code quality, security-first infrastructure, and long-term product impact.</p>
+                    </div>
+                </div>
+
+                <div class="section-header reveal" style="margin-top: 4rem; margin-bottom: 2rem;">
+                    <span class="label-mono">Core Philosophy</span>
+                    <h2>Design &amp; Engineering Principles</h2>
+                </div>
+
+                <div class="philosophy-grid">
+                    <div class="phi-card reveal">
+                        <svg class="phi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        <h4>Uncompromising Craftsmanship</h4>
+                        <p>Every line of code and interface detail is written with surgical intention and thorough testing.</p>
+                    </div>
+                    <div class="phi-card reveal">
+                        <svg class="phi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <h4>Zero-Trust Security</h4>
+                        <p>Security is integrated at the base kernel layer rather than added as an external safeguard.</p>
+                    </div>
+                    <div class="phi-card reveal">
+                        <svg class="phi-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                        <h4>Decadal Durability</h4>
+                        <p>We craft scalable architectures intended to perform seamlessly for years into the future.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="label-mono">Capabilities</span>
+                    <h2>Full-Stack Technology Solutions</h2>
+                    <p>Delivering end-to-end software, infrastructure, security, and computational frameworks for modern digital ecosystems.</p>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card reveal">
+                        <div>
+                            <div class="service-icon">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                            </div>
+                            <h3>Artificial Intelligence</h3>
+                            <p>Custom machine learning runtimes, automated inference pipelines, and neural network optimization.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div>
+                            <div class="service-icon">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>
+                            </div>
+                            <h3>Software Engineering</h3>
+                            <p>High-concurrency systems, microservices architectures, and resilient backend engineering.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div>
+                            <div class="service-icon">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+                            </div>
+                            <h3>Cloud Platforms</h3>
+                            <p>Global cloud deployment pipelines, Kubernetes orchestration, and serverless compute edge grids.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div>
+                            <div class="service-icon">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                            </div>
+                            <h3>Cybersecurity Mesh</h3>
+                            <p>Autonomous threat detection, automated key rotation, and cryptographically verified communications.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div>
+                            <div class="service-icon">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                            </div>
+                            <h3>Enterprise Engines</h3>
+                            <p>Unified enterprise ERPs, automated compliance platforms, and high-performance workflow engines.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div>
+                            <div class="service-icon">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                            </div>
+                            <h3>Developer Ecosystems</h3>
+                            <p>High-efficiency SDKs, API management gateways, and customized command-line developer tools.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div>
+                            <div class="service-icon">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                            </div>
+                            <h3>Digital Migration</h3>
+                            <p>Zero-downtime structural modernization of legacy codebases to cloud-native platforms.</p>
+                        </div>
+                    </div>
+
+                    <div class="service-card reveal">
+                        <div>
+                            <div class="service-icon">
+                                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                            </div>
+                            <h3>System Automation</h3>
+                            <p>Event-driven intelligent workflow automation designed to accelerate organizational speed.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Ecosystem Section -->
+        <section id="products">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="label-mono">Products</span>
+                    <h2>Software Suites &amp; Platforms</h2>
+                    <p>Designed for absolute operational security, developer productivity, and computational power.</p>
+                </div>
+
+                <div class="products-grid">
+                    <div class="product-card reveal">
+                        <div class="product-preview">
+                            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#00C2FF" stroke-width="1.5"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6a6 6 0 1 0 6 6 6 6 0 0 0-6-6zm0 10a4 4 0 1 1 4-4 4 4 0 0 1-4 4z"/></svg>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-badge">ENTERPRISE AI</span>
+                            <h3>Terva AI</h3>
+                            <p>Distributed intelligence runtime powering real-time inference across global edge networks.</p>
+                            <a href="#contact" class="product-link">Explore Platform &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-preview">
+                            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#00C2FF" stroke-width="1.5"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-badge">CLOUD ENGINE</span>
+                            <h3>Terva Cloud</h3>
+                            <p>Hyper-scalable cloud compute layer providing sub-10ms response times worldwide.</p>
+                            <a href="#contact" class="product-link">Explore Platform &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-preview">
+                            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#00C2FF" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-badge">SECURITY MESH</span>
+                            <h3>Terva Cyber</h3>
+                            <p>Automated zero-trust mesh protecting enterprise applications against attack vectors.</p>
+                            <a href="#contact" class="product-link">Explore Platform &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-preview">
+                            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#00C2FF" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-badge">WORKSPACES</span>
+                            <h3>Terva Workspace</h3>
+                            <p>Collaborative operating platform integrating documentation, data systems, and real-time execution.</p>
+                            <a href="#contact" class="product-link">Explore Platform &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-preview">
+                            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#00C2FF" stroke-width="1.5"><path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3zM6 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"/></svg>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-badge">ADVANCED LABS</span>
+                            <h3>Terva Research</h3>
+                            <p>Applied research division advancing quantum-resistant algorithms and distributed ledger systems.</p>
+                            <a href="#contact" class="product-link">Explore Platform &rarr;</a>
+                        </div>
+                    </div>
+
+                    <div class="product-card reveal">
+                        <div class="product-preview">
+                            <svg width="70" height="70" viewBox="0 0 24 24" fill="none" stroke="#00C2FF" stroke-width="1.5"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polygon points="2 17 12 22 22 17 12 12 2 17"/><polygon points="2 12 12 17 22 12 12 7 2 12"/></svg>
+                        </div>
+                        <div class="product-info">
+                            <span class="product-badge">OPERATING SYSTEM</span>
+                            <h3>Terva OS</h3>
+                            <p>Secure microkernel system engineered for IoT networks, robotics, and industrial hardware.</p>
+                            <a href="#contact" class="product-link">Explore Platform &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Architecture Section -->
+        <section id="technology">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="label-mono">System Architecture</span>
+                    <h2>Intelligent Layer Topology</h2>
+                    <p>Interactive architecture visualization showing data propagation across Terva's edge compute grid.</p>
+                </div>
+
+                <div class="tech-architecture-wrapper reveal">
+                    <svg class="arch-diagram" viewBox="0 0 900 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Node 1 -->
+                        <g class="arch-node">
+                            <rect x="40" y="100" width="180" height="100" rx="8" fill="#0F172A" stroke="#00C2FF" stroke-width="2"/>
+                            <text x="130" y="145" fill="#FFFFFF" font-family="Inter" font-size="14" font-weight="600" text-anchor="middle">Global Edge Mesh</text>
+                            <text x="130" y="165" fill="#94A3B8" font-family="IBM Plex Mono" font-size="11" text-anchor="middle">Sub-10ms Ingestion</text>
+                        </g>
+
+                        <!-- Pulse Path 1 -->
+                        <path d="M220 150 L310 150" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+                        <circle cx="220" cy="150" r="4" fill="#00C2FF">
+                            <animate attributeName="cx" values="220;310;220" dur="3s" repeatCount="indefinite" />
+                        </circle>
+
+                        <!-- Node 2 -->
+                        <g class="arch-node">
+                            <rect x="310" y="70" width="280" height="160" rx="8" fill="#0D1627" stroke="rgba(255,255,255,0.25)" stroke-width="2"/>
+                            <text x="450" y="105" fill="#FFFFFF" font-family="Inter" font-size="15" font-weight="600" text-anchor="middle">Terva Compute Core</text>
+                            <rect x="330" y="125" width="110" height="80" rx="4" fill="#08111F" stroke="rgba(0,194,255,0.5)"/>
+                            <text x="385" y="160" fill="#94A3B8" font-family="IBM Plex Mono" font-size="11" text-anchor="middle">Auth Engine</text>
+                            <rect x="460" y="125" width="110" height="80" rx="4" fill="#08111F" stroke="rgba(0,194,255,0.5)"/>
+                            <text x="515" y="160" fill="#94A3B8" font-family="IBM Plex Mono" font-size="11" text-anchor="middle">Neural Pipeline</text>
+                        </g>
+
+                        <!-- Pulse Path 2 -->
+                        <path d="M590 150 L680 150" stroke="rgba(255,255,255,0.15)" stroke-width="2"/>
+                        <circle cx="590" cy="150" r="4" fill="#00C2FF">
+                            <animate attributeName="cx" values="590;680;590" dur="2.5s" repeatCount="indefinite" />
+                        </circle>
+
+                        <!-- Node 3 -->
+                        <g class="arch-node">
+                            <rect x="680" y="100" width="180" height="100" rx="8" fill="#0F172A" stroke="#00C2FF" stroke-width="2"/>
+                            <text x="770" y="145" fill="#FFFFFF" font-family="Inter" font-size="14" font-weight="600" text-anchor="middle">Encrypted Vault</text>
+                            <text x="770" y="165" fill="#94A3B8" font-family="IBM Plex Mono" font-size="11" text-anchor="middle">Distributed Ledger</text>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </section>
+
+        <!-- Industries Served -->
+        <section id="industries">
+            <div class="container">
+                <div class="section-header reveal">
+                    <span class="label-mono">Industries</span>
+                    <h2>Deployments Across Global Sectors</h2>
+                    <p>Modular architectures engineered to address specialized regulatory and computational needs.</p>
+                </div>
+
+                <div class="industries-grid">
+                    <div class="industry-card reveal">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Financial Services</h4>
+                        <p style="font-size: 0.9rem;">High-frequency automated trading infrastructure and ledger compliance.</p>
+                    </div>
+                    <div class="industry-card reveal">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Healthcare &amp; Life Sciences</h4>
+                        <p style="font-size: 0.9rem;">HIPAA-compliant data encryption layers and medical research AI networks.</p>
+                    </div>
+                    <div class="industry-card reveal">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Advanced Manufacturing</h4>
+                        <p style="font-size: 0.9rem;">Industrial IoT monitoring pipelines and automated logistics control.</p>
+                    </div>
+                    <div class="industry-card reveal">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Public Sector &amp; Defense</h4>
+                        <p style="font-size: 0.9rem;">Sovereign cloud security frameworks and zero-trust authentication engines.</p>
+                    </div>
+                    <div class="industry-card reveal">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">E-Commerce &amp; Retail</h4>
+                        <p style="font-size: 0.9rem;">Global real-time inventory systems and high-concurrency checkout engines.</p>
+                    </div>
+                    <div class="industry-card reveal">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Higher Education</h4>
+                        <p style="font-size: 0.9rem;">Encrypted research platforms and high-availability digital campuses.</p>
+                    </div>
+                    <div class="industry-card reveal">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Global Supply Chain</h4>
+                        <p style="font-size: 0.9rem;">Real-time shipment telemetry tracking and predictive route routing.</p>
+                    </div>
+                    <div class="industry-card reveal">
+                        <h4 style="font-size: 1.1rem; margin-bottom: 0.5rem;">Technology Startups</h4>
+                        <p style="font-size: 0.9rem;">Scalable developer tools and microservices engines designed for hypergrowth.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Animated Counter Metrics -->
+        <section id="metrics">
+            <div class="container">
+                <div class="metrics-grid reveal">
+                    <div class="metric-item">
+                        <div class="metric-number" data-target="99.99" data-decimals="2">0</div>
+                        <div class="metric-label">Uptime SLA (%)</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-number" data-target="250" data-decimals="0">0</div>
+                        <div class="metric-label">Avg Global Latency (ms)</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-number" data-target="100" data-decimals="0">0</div>
+                        <div class="metric-label">Zero-Trust Security (%)</div>
+                    </div>
+                    <div class="metric-item">
+                        <div class="metric-number" data-target="24" data-suffix="/7" data-decimals="0">0</div>
+                        <div class="metric-label">Continuous System Guard</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Careers Section -->
+        <section id="careers">
+            <div class="container">
+                <div class="careers-box reveal">
+                    <div>
+                        <span class="label-mono">Careers</span>
+                        <h2 style="font-size: 2.25rem; margin-top: 0.5rem; margin-bottom: 1rem;">Architect the Future with Us</h2>
+                        <p>We are seeking extraordinary software engineers, systems researchers, and product designers committed to engineering excellence.</p>
+                        
+                        <ul class="career-perks">
+                            <li>
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                Remote-first global culture
+                            </li>
+                            <li>
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                Deep focus on engineering mastery and clear execution
+                            </li>
+                            <li>
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                                Competitive equity compensation and long-term security
+                            </li>
+                        </ul>
+                    </div>
+                    <div style="text-align: right;">
+                        <a href="#contact" class="btn btn-primary" style="padding: 1rem 2rem; font-size: 1rem;">Explore Roles &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="reveal">
+                        <div class="section-header" style="margin-bottom: 2rem;">
+                            <span class="label-mono">Contact Us</span>
+                            <h2>Initiate an Engineering Dialogue</h2>
+                            <p>Contact our technical architecture team to discuss custom system integration, enterprise deployments, or strategic engineering partnerships.</p>
+                        </div>
+
+                        <div class="contact-info-list">
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                </div>
+                                <div>
+                                    <h4 style="font-size: 1rem;">Direct Email Contact</h4>
+                                    <a href="mailto:tervatechnologies2@gmail.com" style="color: var(--accent-cyan); text-decoration: none; font-family: var(--font-mono); font-size: 0.95rem;">tervatechnologies2@gmail.com</a>
+                                </div>
+                            </div>
+
+                            <div class="contact-item">
+                                <div class="contact-icon">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                                </div>
+                                <div>
+                                    <h4 style="font-size: 1rem;">Engineering Headquarters</h4>
+                                    <p style="font-size: 0.9rem;">Terva Technologies HQ<br>Enterprise Innovation Corridor</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form class="contact-form reveal" id="contact-form" action="mailto:tervatechnologies2@gmail.com" method="post" enctype="text/plain">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="Name" class="form-control" placeholder="Jane Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Work Email</label>
+                            <input type="email" id="email" name="Email" class="form-control" placeholder="jane@company.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Technical Scope</label>
+                            <select id="subject" name="Scope" class="form-control">
+                                <option>Enterprise Software Engineering</option>
+                                <option>Cloud Architecture &amp; Migration</option>
+                                <option>AI Integration</option>
+                                <option>Cybersecurity &amp; Compliance</option>
+                                <option>General Inquiries</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="Message" class="form-control" placeholder="Describe your architecture and operational requirements..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Technical Request</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+        <span>Inquiry submitted! Mail draft ready for tervatechnologies2@gmail.com</span>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="brand-logo-link" style="margin-bottom: 1rem;">
+                        <svg class="brand-svg" viewBox="0 0 520 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <polygon points="12,18 88,18 76,38 12,38" fill="#FFFFFF"/>
+                            <polygon points="26,48 88,48 76,65 26,65" fill="#E2E8F0"/>
+                            <polygon points="38,38 56,38 56,122 38,136" fill="#CBD5E1"/>
+                            <polygon points="112,18 188,18 176,38 112,38" fill="url(#headerGradBlue)"/>
+                            <polygon points="112,48 174,48 162,65 112,65" fill="url(#headerGradBlue)"/>
+                            <polygon points="112,38 130,38 130,136 112,122" fill="#0073E6"/>
+                            <path d="M 210 50 H 234 M 222 50 V 90" stroke="#FFFFFF" stroke-width="7"/>
+                            <path d="M 252 50 H 274 M 252 70 H 272 M 252 90 H 274" stroke="#FFFFFF" stroke-width="7"/>
+                            <path d="M 292 90 V 50 H 312 C 320 50, 324 55, 324 62 C 324 69, 318 73, 310 73 H 292 M 306 73 L 324 90" stroke="#FFFFFF" stroke-width="7"/>
+                            <path d="M 340 50 L 354 90 L 368 50" stroke="#FFFFFF" stroke-width="7"/>
+                            <path d="M 384 90 L 400 50 L 416 90" stroke="#FFFFFF" stroke-width="7"/>
+                            <polygon points="400,66 392,82 408,82" fill="url(#headerGradCyan)"/>
+                            <text x="210" y="122" fill="#00C2FF" font-family="'IBM Plex Mono', monospace" font-size="16" font-weight="600" letter-spacing="11">TECHNOLOGIES</text>
+                        </svg>
+                    </a>
+                    <p style="max-width: 320px; font-size: 0.85rem; margin-top: 1rem;">Building Technology That Shapes the Future. Engineered with precision, built for scale, and committed to long-term architectural stability.</p>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Capabilities</h5>
+                    <ul class="footer-links">
+                        <li><a href="#services">Artificial Intelligence</a></li>
+                        <li><a href="#services">Cloud Systems</a></li>
+                        <li><a href="#services">Cybersecurity Mesh</a></li>
+                        <li><a href="#services">Developer Ecosystems</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Products</h5>
+                    <ul class="footer-links">
+                        <li><a href="#products">Terva AI</a></li>
+                        <li><a href="#products">Terva Cloud</a></li>
+                        <li><a href="#products">Terva Cyber</a></li>
+                        <li><a href="#products">Terva OS</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h5>Company</h5>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Terva</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#technology">System Architecture</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>&copy; 2026 Terva Technologies Inc. All rights reserved.</div>
+                <div style="display: flex; gap: 1.5rem;">
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none;">Privacy Policy</a>
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none;">Terms of Service</a>
+                    <a href="#" style="color: var(--text-secondary); text-decoration: none;">Security Architecture</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Mouse Spotlight Glow Follower
+        const cursorGlow = document.getElementById('cursor-glow');
+        window.addEventListener('mousemove', (e) => {
+            cursorGlow.style.left = e.clientX + 'px';
+            cursorGlow.style.top = e.clientY + 'px';
+        });
+
+        // Ambient Dynamic Canvas Background
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.opacity = Math.random() * 0.4 + 0.1;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+
+            draw() {
+                ctx.fillStyle = `rgba(0, 194, 255, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.floor((canvas.width * canvas.height) / 18000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+
+        // Header Scroll Effect
+        const header = document.getElementById('main-header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 40) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll Reveal Observer
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Interactive 3D Card Tilt Effect
+        const tiltCards = document.querySelectorAll('.tilt-card');
+        tiltCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left - rect.width / 2;
+                const y = e.clientY - rect.top - rect.height / 2;
+                card.style.transform = `perspective(1000px) rotateX(${-y / 20}deg) rotateY(${x / 20}deg) translateY(-4px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+            });
+        });
+
+        // Metric Counter Animation
+        const metricNumbers = document.querySelectorAll('.metric-number');
+        let animatedMetrics = false;
+
+        const metricsSection = document.getElementById('metrics');
+        const metricsObserver = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting && !animatedMetrics) {
+                animatedMetrics = true;
+                metricNumbers.forEach(num => {
+                    const target = parseFloat(num.getAttribute('data-target'));
+                    const decimals = parseInt(num.getAttribute('data-decimals') || '0');
+                    const suffix = num.getAttribute('data-suffix') || '';
+                    let current = 0;
+                    const duration = 2000;
+                    const stepTime = 20;
+                    const steps = duration / stepTime;
+                    const increment = target / steps;
+
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        num.textContent = current.toFixed(decimals) + suffix;
+                    }, stepTime);
+                });
+            }
+        }, { threshold: 0.3 });
+
+        if (metricsSection) metricsObserver.observe(metricsSection);
+
+        // Contact Form Handler & Toast
+        const contactForm = document.getElementById('contact-form');
+        const toast = document.getElementById('toast');
+        if (contactForm) {
+            contactForm.addEventListener('submit', (e) => {
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 4000);
+            });
+        }
+    </script>
+</body>
+</html>
